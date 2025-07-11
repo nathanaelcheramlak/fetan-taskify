@@ -18,7 +18,6 @@ const config = {
 
   // JWT Config
   JWT_SECRET: requiredEnv("JWT_SECRET"),
-  JWT_EXPIRATION: Number(process.env.JWT_ACCESS_EXPIRATION) || 3600,
 
   // CORS
   CORS_ORIGIN: process.env.CORS_ORIGIN || "*",
