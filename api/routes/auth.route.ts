@@ -1,17 +1,16 @@
 import express from "express";
 import {
-	signupController,
-	loginController,
-	logoutController,
-	forgotPasswordController,
+	signup,
+	login,
+	logout,
+	forgotPassword,
 } from "../controllers/auth.controller";
-import isAuthenticated from "../middleware/authMiddleware";
 
 const router = express.Router();
 
-router.post("/signup", signupController);
-router.post("/login", loginController);
-router.delete("/logout", logoutController);
+router.post("/signup", signup);
+router.post("/login", login);
+router.delete("/logout", logout);
+router.post("/forgot-password", forgotPassword);
 
-router.post("/forgot-password", forgotPasswordController);
 export default router;

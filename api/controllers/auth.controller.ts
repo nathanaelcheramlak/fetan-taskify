@@ -10,7 +10,7 @@ import User from "../models/user.model";
 import bcrypt from "bcryptjs";
 import { clearJWT, setJWT } from "../utils/JWT";
 
-export const signupController = async (
+export const signup = async (
 	req: RequestType<{}, {}, SignupRequestBody>,
 	res: Response,
 	next: NextFunction
@@ -64,7 +64,7 @@ export const signupController = async (
 	}
 };
 
-export const loginController = async (
+export const login = async (
 	req: RequestType<{}, {}, LoginRequestBody>,
 	res: Response,
 	next: NextFunction
@@ -109,7 +109,7 @@ export const loginController = async (
 	}
 };
 
-export const logoutController = async (
+export const logout = async (
 	req: RequestType,
 	res: Response,
 	next: NextFunction
@@ -122,7 +122,4 @@ export const logoutController = async (
 	}
 };
 
-export const forgotPasswordController = async (
-	req: RequestType,
-	res: Response
-) => {};
+export const forgotPassword = async (req: RequestType, res: Response) => {};
