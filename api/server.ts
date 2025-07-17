@@ -4,7 +4,7 @@ import helmet from "helmet";
 import cors from "cors";
 
 import env from "./config/env";
-import errorHandler from "./utils/errorHandler";
+import errorHandler from "./middleware/error.middleware";
 import connectDB from "./config/db";
 
 import authRoutes from "./routes/auth.route";

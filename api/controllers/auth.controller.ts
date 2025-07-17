@@ -1,4 +1,4 @@
-import { CustomError } from "../types/ErrorType";
+import { HTTPError } from "../middleware/error.middleware";
 import { RequestType } from "../types/RequestType";
 import { NextFunction, Response } from "express";
 import type {
@@ -17,29 +17,29 @@ export const signup = async (
 ) => {
 	try {
 		if (!req.body) {
-			throw new CustomError("Invalid request body", 400);
+			throw new HTTPError("Invalid request body", 400);
 		}
 		const { fullname, email, password } = req.body;
 
 		// Validate Fields
 		if (!fullname || !email || !password) {
-			throw new CustomError("Fullname, email, and password are required", 400);
+			throw new HTTPError("Fullname, email, and password are required", 400);
 		}
 
 		// Validate Email
 		if (!/^\S+@\S+\.\S+$/.test(email)) {
-			throw new CustomError("Invalid email format", 400);
+			throw new HTTPError("Invalid email format", 400);
 		}
 
 		// Validate Password
 		if (password.length < 8) {
-			throw new CustomError("Password must be at least 8 characters long", 400);
+			throw new HTTPError("Password must be at least 8 characters long", 400);
 		}
 
 		// Check existing user
 		const existingUser = await User.findOne({ email });
 		if (existingUser) {
-			throw new CustomError("Email already exists", 400);
+			throw new HTTPError("Email already exists", 400);
 		}
 
 		const user = new User({ fullname, email, password });
@@ -71,24 +71,24 @@ export const login = async (
 ) => {
 	try {
 		if (!req.body) {
-			throw new CustomError("Invalid request body", 400);
+			throw new HTTPError("Invalid request body", 400);
 		}
 		const { email, password } = req.body;
 
 		// Validate Fields
 		if (!email || !password) {
-			throw new CustomError("Email and Password is required", 400);
+			throw new HTTPError("Email and Password is required", 400);
 		}
 
 		const user = await User.findOne({ email });
 		if (!user) {
-			throw new CustomError("Invalid credentials", 401);
+			throw new HTTPError("Invalid credentials", 401);
 		}
 
 		// Check password match
 		const isMatch = await bcrypt.compare(password, user.password);
 		if (!isMatch) {
-			throw new CustomError("Invalid credentials", 400);
+			throw new HTTPError("Invalid credentials", 400);
 		}
 
 		// Generate JWT

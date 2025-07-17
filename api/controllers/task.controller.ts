@@ -5,7 +5,7 @@ import {
 	GetTaskRequestQuery,
 } from "../types/RequestType";
 import User from "../models/user.model";
-import { CustomError } from "../types/ErrorType";
+import { HTTPError } from "../middleware/error.middleware";
 import Task from "../models/task.model";
 
 export const getTasks = async (
@@ -51,13 +51,13 @@ export const createTask = async (
 
 		// Validation
 		if (typeof name !== "string" || name.trim() === "") {
-			throw new CustomError("Task name must be a non-empty string", 400);
+			throw new HTTPError("Task name must be a non-empty string", 400);
 		}
 
 		const userId = req.user!.id;
 		const user = await User.findById(userId);
 		if (!user) {
-			throw new CustomError("User not found", 404);
+			throw new HTTPError("User not found", 404);
 		}
 
 		const newTask = new Task({ name, status, user: userId });
@@ -84,12 +84,12 @@ export const updateTask = async (
 		const taskId = req.params.id;
 
 		if (!["pending", "completed"].includes(status)) {
-			throw new CustomError("Invalid status value", 400);
+			throw new HTTPError("Invalid status value", 400);
 		}
 
 		const task = await Task.findById(taskId);
 		if (!task || task.user.toString() !== userId) {
-			throw new CustomError("Task not found", 404);
+			throw new HTTPError("Task not found", 404);
 		}
 
 		task.status = status as "pending" | "completed";
@@ -116,7 +116,7 @@ export const deleteTask = async (
 
 		const task = await Task.findById(taskId);
 		if (!task || task.user.toString() !== userId) {
-			throw new CustomError("Task not found", 404);
+			throw new HTTPError("Task not found", 404);
 		}
 
 		await Task.deleteOne({ _id: taskId });

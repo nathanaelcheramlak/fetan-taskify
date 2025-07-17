@@ -1,6 +1,6 @@
 import { Response, NextFunction } from "express";
 import type { RequestType } from "../types/RequestType";
-import { CustomError } from "../types/ErrorType";
+import { HTTPError } from "../middleware/error.middleware";
 import User from "../models/user.model";
 
 export const getProfile = async (
@@ -10,13 +10,13 @@ export const getProfile = async (
 ) => {
 	try {
 		if (!req.user) {
-			throw new CustomError("Unauthorized: Login with your account", 400);
+			throw new HTTPError("Unauthorized: Login with your account", 400);
 		}
 		const userId = req.user.id;
 
 		const user = await User.findById(userId);
 		if (!user) {
-			throw new CustomError("User not found", 404);
+			throw new HTTPError("User not found", 404);
 		}
 
 		res.status(200).json({
