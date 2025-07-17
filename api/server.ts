@@ -13,9 +13,10 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+app.use("/health", (req, res) => res.send("Server is healthy"));
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/profile", profileRoutes);
-app.use("api/v1/tasks", taskRoutes);
+app.use("/api/v1/tasks", taskRoutes);
 
 app.use(errorHandler);
 
