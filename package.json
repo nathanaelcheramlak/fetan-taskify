@@ -1,33 +1,33 @@
 {
-  "name": "taskify",
-  "version": "1.0.0",
-  "description": "",
-  "main": "/api/server.ts",
-  "scripts": {
-    "dev": "nodemon api/server.ts",
-    "start": "tsc api/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "nathanaelcheramlak",
-  "license": "ISC",
-  "packageManager": "pnpm@10.12.1",
-  "dependencies": {
-    "bcryptjs": "^3.0.2",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.0",
-    "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.16.2",
-    "ts-node": "^10.9.2"
-  },
-  "devDependencies": {
-    "@types/cookie-parser": "^1.4.9",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
-    "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^24.0.12",
-    "nodemon": "^3.1.10"
-  }
+	"name": "taskify",
+	"version": "1.0.0",
+	"description": "",
+	"main": "/api/server.ts",
+	"scripts": {
+		"dev": "nodemon api/server.ts",
+		"start": "node dist/server.js",
+		"build": "npx tsc"
+	},
+	"keywords": [],
+	"author": "nathanaelcheramlak",
+	"license": "ISC",
+	"packageManager": "pnpm@10.12.1",
+	"dependencies": {
+		"bcryptjs": "^3.0.2",
+		"cookie-parser": "^1.4.7",
+		"cors": "^2.8.5",
+		"dotenv": "^17.2.0",
+		"express": "^5.1.0",
+		"jsonwebtoken": "^9.0.2",
+		"mongoose": "^8.16.2",
+		"ts-node": "^10.9.2"
+	},
+	"devDependencies": {
+		"@types/cookie-parser": "^1.4.9",
+		"@types/cors": "^2.8.19",
+		"@types/express": "^5.0.3",
+		"@types/jsonwebtoken": "^9.0.10",
+		"@types/node": "^24.0.12",
+		"nodemon": "^3.1.10"
+	}
 }
